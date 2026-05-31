@@ -61,19 +61,3 @@ python test.py
 
 The evaluation script loads a pretrained model and generates metalens designs, field distributions, focal efficiencies, and visualization results.
 
-## Citation
-
-If you use this code in your research, please cite:
-
-```bibtex
-@article{huang2025den,
-  title={Photonic Design by Dimension Expansion Network},
-  author={Huang, Shuo and collaborators},
-  year={2025}
-}
-```
-
-## Contact
-
-Shuo Huang: shuohuan@usc.edu
-University of Southern California (USC)
