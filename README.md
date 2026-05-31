@@ -47,9 +47,9 @@ pip install torch numpy scipy matplotlib opencv-python seaborn
 python trainmetalens80by80.py
 ```
 
-## Pretrained Model
+## Trained model after 8,300 iterations
 
-Download the pretrained model from:
+A pretrained model after **8,300 training iterations** can be downloaded from:
 
 https://github.com/huangshuo343/dimension_expansion_network/releases
 
