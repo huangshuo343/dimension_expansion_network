@@ -1,4 +1,4 @@
-# Nanophotonic Inverse Design by Dimension Expansion Network (DEN) for Metalens
+# Dimension expansion for simulation-efficient nanophotonic neural networks
 
 <p align="center">
   <img src="figures/Figure_proposed_method_15.png" width="1000">
