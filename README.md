@@ -1,7 +1,7 @@
 # Nanophotonic Inverse Design by Dimension Expansion Network (DEN) for Metalens
 
 <p align="center">
-  <img src="Figure_proposed_method.png" width="1000">
+  <img src="figures/Figure_proposed_method_15.png" width="1000">
 </p>
 
 <p align="center">
