@@ -23,7 +23,6 @@ Given a target focal position, the DEN expands the low-dimensional target into a
 | `unet.py` | U-Net architecture and DEN implementation |
 | `loss.py` | Electromagnetic simulation and FoM computation |
 | `utils.py` | Utility functions |
-| `model.pth` | Pretrained model |
 | `Figure_proposed_method.png` | Overview of the proposed method |
 
 ## Requirements
@@ -47,6 +46,12 @@ pip install torch numpy scipy matplotlib opencv-python seaborn
 ```bash
 python trainmetalens80by80.py
 ```
+
+## Pretrained Model
+
+Download the pretrained model from:
+
+https://github.com/huangshuo343/dimension_expansion_network/releases
 
 ## Evaluation
 
