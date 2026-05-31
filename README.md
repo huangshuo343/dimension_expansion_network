@@ -1,4 +1,4 @@
-# Photonic Design by Dimension Expansion Network (DEN) for Metalens Inverse Design
+# Nanophotonic Inverse Design by Dimension Expansion Network (DEN) for Metalens
 
 <p align="center">
   <img src="Figure_proposed_method.png" width="1000">
