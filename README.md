@@ -64,7 +64,7 @@ The evaluation script loads a pretrained model and generates metalens designs, f
 If you find our work useful, please cite it as:
 
 ```bibtex
-@article{HuangShuo_,
+@article{HuangShuo2026dimension,
   author    = {Huang, Shuo and Torfeh, Mahsa and Zhong, Lujia and Povinelli, Michelle Lynn and Miller, Owen D and Hsu, Chia Wei},
   title     = {Dimension expansion for simulation-efficient nanophotonic neural networks},
   journal   = {arXiv preprint arXiv:2606.25226},
