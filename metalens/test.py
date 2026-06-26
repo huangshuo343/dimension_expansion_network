@@ -247,13 +247,15 @@ def build_performance_case(
 ):
     p_opt = output.detach().cpu().numpy()
 
+    # Binarization degree
     n_binary = (0.7 - np.abs(p_opt - 1.7)) / 0.7
     degreebinary = 1.0 - np.mean(n_binary)
-    print(f"The binarization degree is: {degreebinary}.")
 
+    # Embed the predicted structure into the design region
     n_design_tiled = np.tile(p_opt[:, None], (1, np.sum(cols)))
     n[np.ix_(rows, cols)] = n_design_tiled
 
+    # Full simulation domain
     n_large = np.ones((ny, nx))
     n_large[:, 10:] = n
 
@@ -264,36 +266,20 @@ def build_performance_case(
     psi_in_2D = np.zeros((ny0, nx0), dtype=np.complex64)
     psi_in_2D[40:-40, N_PML + 5] = 1.0
 
+    # Solve
     start_time = time.time()
     psi_sca = spsolve(A, psi_in_2D.flatten("F")).reshape(ny0, nx0, order="F")
     psi_tot = psi_in_2D + psi_sca
     elapsed = time.time() - start_time
 
-    print(f"Elapsed time: {elapsed:.2f} seconds")
-    print(
-        "The FoM is:",
-        np.abs(psi_tot[ind_y, ind_x]) ** 2,
-        ", and the position is:",
-        (ind_y, ind_x),
-        ".",
-    )
-    print(
-        "The maximum value of the field is:",
-        np.max(np.abs(psi_tot)) ** 2,
-        ", and the position is:",
-        np.unravel_index(np.argmax(np.abs(psi_tot)), psi_tot.shape),
-        ".",
-    )
-
+    # Metrics (kept for internal use; not printed except the requested one)
     power_incident = np.sum(np.abs(psi_in_2D[:, N_PML + 5]) ** 2)
     power_focal = np.sum(np.abs(psi_tot[ind_y - 3: ind_y + 4, ind_x]) ** 2)
     eff_perc = power_focal / power_incident * 100
-    print(f"The efficiency within the focal region is: {eff_perc:.4f}%.")
 
     half_max = np.max(np.abs(psi_tot[40:-40, ind_x]) ** 2 / 30) / 2
     half_max_loc = np.where(np.abs(psi_tot[40:-40, ind_x]) ** 2 / 30 > half_max)[0]
     half_max_wid = (half_max_loc[-1] - half_max_loc[0]) * dx
-    print(f"The half max width is: {half_max_wid * 1.0e6:.4f} micrometers.")
 
     leng = 0.3e-6
     half_win = int((leng / 2) / dx)
@@ -312,20 +298,17 @@ def build_performance_case(
 
     psi_transmission_totalinput = 445.94516036157154
     efficiencypoynti = psi_transmission_totalpoint / psi_transmission_totalinput
-    print("The Poynting flux is:", efficiencypoynti, ".")
 
     power_tot = np.sum(np.abs(psi_tot[y_slice, ind_x]) ** 2)
-    print("The total power within the focal region is:", power_tot, ".")
+
+    # Only print what you requested
+    print(f"Elapsed time: {elapsed:.2f} seconds")
+    print(f"The total power within the focal region is: {power_tot / 270:.6f}.")
+    print(f"The binarization degree is: {degreebinary:.6f}.")
 
     return {
-        "degreebinary": degreebinary,
         "n_large": n_large,
         "psi_tot": psi_tot,
-        "psi_in_2D": psi_in_2D,
-        "eff_perc": eff_perc,
-        "half_max_wid": half_max_wid,
-        "efficiencypoynti": efficiencypoynti,
-        "power_tot": power_tot,
     }
 
 
